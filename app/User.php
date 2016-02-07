@@ -15,6 +15,20 @@ class User extends Authenticatable
         'name', 'email'
     ];
 
+	function hasemail($email){
+		
+		$user = $this->where("email", $email)->first();
+		
+		if(isset($user)){
+			
+			return true;
+			
+		}
+		
+		return false;
+		
+	}
+	
     function generateCode()
     {
         $this->code = str_random(4);
@@ -23,6 +37,7 @@ class User extends Authenticatable
     function generateUrl()
     {
         $this->url = str_replace(" ", "-", strtolower(preg_replace("/[^A-Za-z0-9 ]/", '', $this->name)));
+		
     }
 
     function generatePasscode()

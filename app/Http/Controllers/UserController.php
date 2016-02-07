@@ -35,11 +35,18 @@ class UserController extends Controller
         $email = $request->input('email');
 		 
         $user = new User;
-        $user->email = $email;
+		
+		if($user->hasemail($email)){
+			
+			//Do Something
+			
+		}else{
+		
+		$user->email=$email;
         $user->generateCode();
 		$user->generatePasscode();
         $user->save();
-		
+	}
 		return redirect()->action("UserController@edit", [$user->id, $user->passcode]);
 		
 	}
@@ -63,6 +70,8 @@ class UserController extends Controller
 		$user->city=$city;
 		$user->generateURL();
 		$user->save();
+		
+		
 		
 		return redirect()->action("UserController@showProfile", [$user->url, $user->code]);
 		
