@@ -71,8 +71,8 @@ class UserController extends Controller
 		$user->website=$website;
 		
 		$user->generateUrl();
-		
 		$user->save();
+		
 		return redirect()->action("UserController@showProfile", [$user->url, $user->code]);
 		
 	}
